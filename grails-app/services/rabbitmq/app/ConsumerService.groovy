@@ -2,13 +2,16 @@ package rabbitmq.app
 
 class ConsumerService {
 
-    static transactional = true
+    static transactional = false
     static rabbitQueue = 'myQueueName'
+    
+    Closure callback
 
     void handleMessage(message) {
-        def thread = Thread.currentThread().name
-        println "Recieved: $message in thread $thread"
+      if(callback) {
+        callback(message)  
+      } else {
+        println message
+      }
     } 
-      
-    
 }

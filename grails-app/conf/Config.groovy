@@ -96,7 +96,7 @@ rabbitmq {
         hostname = 'localhost' 
     }  
     
-    concurrentConsumers = 5                       
+    concurrentConsumers = 5                      
     
     queues = {  
       myQueueName()
