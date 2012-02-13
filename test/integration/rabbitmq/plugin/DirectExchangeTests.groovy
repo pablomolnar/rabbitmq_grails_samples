@@ -42,7 +42,7 @@ class DirectExchangeTests extends GroovyTestCase {
           threads << Thread.currentThread().name
         }
         
-        // 5 messages round robin with 5 consumers
+        // 5 messages round robin with acknowledgeMode5 consumers
         5.times { 
           rabbitTemplate.convertAndSend '', 'myQueueName', 'someMessage'
         }

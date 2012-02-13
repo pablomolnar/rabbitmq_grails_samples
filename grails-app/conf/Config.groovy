@@ -99,6 +99,9 @@ rabbitmq {
     concurrentConsumers = 5                      
     
     queues = {  
-      myQueueName()
+      myQueueName()    
+      exchange name: 'my.exchange.direct', type: direct, durable: false, {
+        customExchangeBindQueue durable: false
+      } 
     }
 }
