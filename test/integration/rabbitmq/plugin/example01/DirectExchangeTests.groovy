@@ -1,4 +1,4 @@
-package rabbitmq.plugin
+package rabbitmq.plugin.example01
 
 import grails.test.*  
 import java.util.concurrent.atomic.*
@@ -48,7 +48,7 @@ class DirectExchangeTests extends GroovyTestCase {
         }
 
         sleep(10)
-        assert 5 == consumed.intValue()           
-        assert 5 == threads.unique().size()
+        assert 5 == consumed.intValue()
+        assert threads.unique().size() > 1 // Check more than one thread consume the queue
     }
 }

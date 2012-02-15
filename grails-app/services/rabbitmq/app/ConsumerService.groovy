@@ -7,7 +7,7 @@ class ConsumerService {
     
     Closure callback
 
-    void handleMessage(message) {
+    void handleMessage(String message) {
       if(callback) {
         callback(message)  
       } else {
