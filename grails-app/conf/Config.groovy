@@ -98,18 +98,18 @@ rabbitmq {
     
     concurrentConsumers = 5                      
 
-    queues = {  
-      myQueueName()    
-      exchange name: 'my.exchange.direct', type: direct, durable: false, {
-        myQueueName durable: false
+    queues = {
+      myQueueName durable: true
+      exchange name: 'my.exchange.direct', type: direct, durable: true, {
+        myQueueName durable: true
+      }
+
+      exchange name: 'my.topic', type: topic, durable: true, {
+        myQueueName binding: 'prime'
       }
 
       exchange name: 'amq.headers', type: headers, durable: true, {
         myQueueName binding: [prime: true, 'x-match': 'all']
-      }
-      exchange name: 'amq.headers', type: headers, durable: true, {
-            // Route all closed item to refresh item cache. Should store a record in memcached (most cases an empty array)
-        myQueueName binding:['prime': true, 'x-match': 'all']
       }
     }
 }
