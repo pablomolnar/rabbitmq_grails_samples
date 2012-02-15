@@ -104,6 +104,8 @@ rabbitmq {
         myQueueName durable: true
       }
 
+      exchange name: 'my.broadcast', type: fanout
+
       exchange name: 'my.topic', type: topic, durable: true, {
         myQueueName binding: 'prime'
       }
