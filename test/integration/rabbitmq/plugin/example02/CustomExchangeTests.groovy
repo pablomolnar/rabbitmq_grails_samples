@@ -30,4 +30,22 @@ class CustomExchangeTests extends GroovyTestCase {
         sleep(10)
         assert consumed
     }
+
+    void testRetryMessage() {
+        def consumed = new AtomicInteger(0)
+
+        consumerService.callback = { message ->
+            assert 'someMessage' == message
+
+            // Force fail 5 times
+            if(consumed.incrementAndGet() < 5) {
+                throw new RuntimeException("Nr: ${consumed.intValue()}")
+            }
+        }
+
+        // Exchange amqp.direct with routing key myQueueName
+        rabbitTemplate.convertAndSend 'my.exchange.direct', 'myQueueName', 'someMessage'
+        sleep(50)
+        assert 5 == consumed.intValue()
+    }
 }
